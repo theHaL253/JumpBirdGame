@@ -1,5 +1,9 @@
-import { _decorator, Component, Node, Vec3, screen, find } from 'cc';
+import { _decorator, Component, Node, Vec3, screen, find, UITransform } from 'cc';
 const { ccclass, property } = _decorator;
+
+const random = (min,max) => {
+    return Math.random() * (max-min) + min;
+}
 
 @ccclass('Pipes')
 export class Pipes extends Component {
@@ -34,6 +38,18 @@ export class Pipes extends Component {
     }
 
     initPos(){
+
+        this.tempStartLocationUp.x = (this.topPipe.getComponent(UITransform).width + this.scene.width);
+        this.tempStartLocationDown.x = (this.topPipe.getComponent(UITransform).width + this.scene.width);
+
+        let gap = random(90,100);
+        let topHeight = random(0,450);
+
+        this.tempStartLocationUp.y = topHeight;
+        this.tempStartLocationDown.y = topHeight - (gap*10);
+
+        this.bottomPipe.setPosition(this.tempStartLocationDown);
+        this.topPipe.setPosition(this.tempStartLocationUp);
 
     }
 
