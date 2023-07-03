@@ -59,7 +59,6 @@ export class Ground extends Component {
 
 
     update(deltaTime: number) {
-        console.log("12312");
         this.gameSpeed = this.gameCtrlSpeed.speed;
 
         this.ground1.setPosition(v3(this.ground1.position.x - this.gameSpeed * deltaTime, this.ground1.position.y));

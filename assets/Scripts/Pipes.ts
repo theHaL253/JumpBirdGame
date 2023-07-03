@@ -28,6 +28,8 @@ export class Pipes extends Component {
     public pipeSpeed:number; //final speed of the pipes
     public tempSpeed:number; //temporary speed
 
+    isPass: boolean;
+
     protected onLoad(): void {
         //The line below is to get pipeSpeed from GameCtrl, but please keep in mind we
         //cannot import GameCtrl file which can create circular request later on(not good).
@@ -35,6 +37,8 @@ export class Pipes extends Component {
         this.game = find("GameCtrl").getComponent("GameCtrl");
         this.pipeSpeed = this.game.pipeSpeed;
         this.initPos();
+        
+        this.isPass = false;
     }
 
     initPos(){
@@ -53,8 +57,30 @@ export class Pipes extends Component {
 
     }
 
-    protected update(dt: number): void {
-        
+    update(deltaTime){
+
+        this.tempSpeed = this.pipeSpeed * deltaTime;
+
+        this.tempStartLocationDown = this.bottomPipe.position;
+        this.tempStartLocationUp = this.topPipe.position;
+
+        this.tempStartLocationDown.x -= this.tempSpeed;
+        this.tempStartLocationUp.x -= this.tempSpeed;
+
+        this.bottomPipe.setPosition(this.tempStartLocationDown);
+        this.topPipe.setPosition(this.tempStartLocationUp);
+
+        if(this.isPass == false && this.topPipe.position.x <= 0){
+            this.isPass = true;
+            this.game.passPipe();
+        }
+
+        if (this.topPipe.position.x < (0 - this.scene.width)){
+            this.game.createPipe();
+            this.destroy();
+        }
+
+
     }
 
 }

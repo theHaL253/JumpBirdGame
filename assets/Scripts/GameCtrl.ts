@@ -2,6 +2,7 @@ import { _decorator, CCInteger, Component, Node, input, Input, EventKeyboard, Ke
 import { Ground } from './Ground';
 import { Results } from './Results';
 import { Bird } from './Bird';
+import { PipePool } from './PipePool';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameCtrl')
@@ -23,6 +24,10 @@ export class GameCtrl extends Component {
     })
     public bird: Bird;
 
+    @property({
+        type:PipePool
+    })
+    public pipeQueue: PipePool;
 
     @property({
         type: CCInteger
@@ -80,9 +85,17 @@ export class GameCtrl extends Component {
     }
 
     resetGame(){
-
         this.result.resetScore();
+        this.pipeQueue.reset();
         this.startGame();
+    }
+
+    passPipe(){
+        this.result.addScore();
+    }
+
+    createPipe(){
+        this.pipeQueue.addPool();
     }
 
 }
