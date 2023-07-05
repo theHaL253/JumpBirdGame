@@ -12,6 +12,12 @@ export class BirdAudio extends Component {
         type: AudioSource
     })
     public audioSource: AudioSource = null;
+
+    onAudioQueue(index: number){
+        let clip: AudioClip = this.clips[index];
+
+        this.audioSource.playOneShot(clip);
+    }
 }
 
 
