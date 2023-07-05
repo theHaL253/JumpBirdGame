@@ -46,7 +46,7 @@ export class Pipes extends Component {
         this.tempStartLocationUp.x = (this.topPipe.getComponent(UITransform).width + this.scene.width);
         this.tempStartLocationDown.x = (this.topPipe.getComponent(UITransform).width + this.scene.width);
 
-        let gap = random(90,100);
+        let gap = random(95,100);
         let topHeight = random(0,450);
 
         this.tempStartLocationUp.y = topHeight;

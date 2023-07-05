@@ -1,4 +1,4 @@
-import { _decorator, CCInteger, Component, Node, input, Input, EventKeyboard, KeyCode, director } from 'cc';
+import { _decorator, CCInteger, Component, Node, input, Input, EventKeyboard, KeyCode, director, Contact2DType, Collider2D, IPhysics2DContact } from 'cc';
 import { Ground } from './Ground';
 import { Results } from './Results';
 import { Bird } from './Bird';
@@ -38,38 +38,47 @@ export class GameCtrl extends Component {
         type:CCInteger
     })
     public pipeSpeed: number = 200;
+    public isOver: boolean;
 
     onLoad(){
         this.initListener();
         this.result.resetScore();
+        this.isOver = true;
         director.pause();
     }
 
     initListener(){
 
-        input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
+    // input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
 
         this.node.on(Node.EventType.TOUCH_START, () => {
-            console.log(213);
-            this.bird.fly();
-        })
 
+            if(this.isOver == true){
+                this.resetGame();
+                this.bird.resetBird();
+                this.startGame();
+            }
+
+            if(this.isOver == false){
+                this.bird.fly();
+            }
+        })
     }
 
     /* Just for testing, DELETE ME after done all the steps */
-    onKeyDown(event: EventKeyboard){
-        switch(event.keyCode){
-            case KeyCode.KEY_A:
-                this.gameOver();
-            break;
-            case KeyCode.KEY_P:
-                this.result.addScore();
-            break;
-            case KeyCode.KEY_Q:
-                this.resetGame();
-                this.bird.resetBird();
-        }        
-    }
+    // onKeyDown(event: EventKeyboard){
+    //     switch(event.keyCode){
+    //         case KeyCode.KEY_A:
+    //             this.gameOver();
+    //         break;
+    //         case KeyCode.KEY_P:
+    //             this.result.addScore();
+    //         break;
+    //         case KeyCode.KEY_Q:
+    //             this.resetGame();
+    //             this.bird.resetBird();
+    //     }        
+    // }
 
     startGame(){
 
@@ -80,6 +89,7 @@ export class GameCtrl extends Component {
     gameOver(){
 
         this.result.showResults();
+        this.isOver = true;
         director.pause();
 
     }
@@ -87,6 +97,7 @@ export class GameCtrl extends Component {
     resetGame(){
         this.result.resetScore();
         this.pipeQueue.reset();
+        this.isOver = false;
         this.startGame();
     }
 
@@ -96,6 +107,32 @@ export class GameCtrl extends Component {
 
     createPipe(){
         this.pipeQueue.addPool();
+    }
+    
+    contactGroundPipe(){
+        let collider = this.bird.getComponent(Collider2D)
+
+        if(collider){
+            collider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this)
+        }
+    }
+
+    onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null){
+        this.bird.hitSomething = true;
+    }
+
+    birdStruck(){
+        this.contactGroundPipe();
+
+        if (this.bird.hitSomething == true){
+            this.gameOver();
+        }
+    }
+
+    protected update(dt: number): void {
+        if(this.isOver == false){
+            this.birdStruck();
+        }
     }
 
 }
