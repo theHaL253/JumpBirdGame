@@ -33,6 +33,9 @@ export class Ground extends Component {
     public tempStartLocation2 = new Vec3;
     public tempStartLocation3 = new Vec3;
 
+    @property({
+        type: GameCtrl,
+    }) 
     public gameCtrlSpeed = new GameCtrl;
     public gameSpeed: number = 50;
 

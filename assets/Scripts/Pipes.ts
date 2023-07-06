@@ -57,7 +57,7 @@ export class Pipes extends Component {
 
     }
 
-    update(deltaTime){
+    update(deltaTime: number){
 
         this.tempSpeed = this.pipeSpeed * deltaTime;
 

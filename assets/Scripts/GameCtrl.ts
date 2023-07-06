@@ -1,4 +1,4 @@
-import { _decorator, CCInteger, Component, Node, input, Input, EventKeyboard, KeyCode, director, Contact2DType, Collider2D, IPhysics2DContact } from 'cc';
+import { _decorator, CCInteger, Component, Node, input, Input, EventKeyboard, KeyCode, director, Contact2DType, Collider2D, IPhysics2DContact, Scene } from 'cc';
 import { Ground } from './Ground';
 import { Results } from './Results';
 import { Bird } from './Bird';
@@ -47,6 +47,7 @@ export class GameCtrl extends Component {
     public isOver: boolean;
 
     onLoad(){
+        console.log(this.node.parent)
         this.initListener();
         this.result.resetScore();
         this.isOver = true;
@@ -139,7 +140,7 @@ export class GameCtrl extends Component {
         }
     }
 
-    protected update(dt: number): void {
+    update(dt: number){
         if(this.isOver == false){
             this.birdStruck();
         }
