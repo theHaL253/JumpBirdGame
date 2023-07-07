@@ -35,6 +35,7 @@ export class GameCtrl extends Component {
     })
     public clip: BirdAudio;
 
+    //In CC, there are CCInteger type, CCFloat type, etc for number.. 
     @property({
         type: CCInteger
     })
@@ -51,6 +52,7 @@ export class GameCtrl extends Component {
         this.initListener();
         this.result.resetScore();
         this.isOver = true;
+        //This pause function will pause all the logic executions, event manager and audio effects
         director.pause();
     }
 
@@ -140,10 +142,9 @@ export class GameCtrl extends Component {
         }
     }
 
-    update(dt: number){
+    update(deltaTime: number){
         if(this.isOver == false){
             this.birdStruck();
         }
     }
-
 }

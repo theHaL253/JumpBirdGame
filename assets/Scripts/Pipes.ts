@@ -30,7 +30,7 @@ export class Pipes extends Component {
 
     isPass: boolean;
 
-    protected onLoad(): void {
+    onLoad() {
         //The line below is to get pipeSpeed from GameCtrl, but please keep in mind we
         //cannot import GameCtrl file which can create circular request later on(not good).
         //We should use the "find" keyword instead
@@ -79,11 +79,5 @@ export class Pipes extends Component {
             this.game.createPipe();
             this.destroy();
         }
-
-
     }
-
 }
-
-
-

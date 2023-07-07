@@ -60,7 +60,7 @@ export class Ground extends Component {
 
 
 
-
+    // This function will operate all the methods, logic of the ground
     update(deltaTime: number) {
         this.gameSpeed = this.gameCtrlSpeed.speed;
 
@@ -91,7 +91,5 @@ export class Ground extends Component {
         if (this.tempStartLocation3.x <= (0 - this.groundWidth3)) {
             this.tempStartLocation3.x = canvas.getComponent(UITransform).width
         }
-
-        console.log(this.ground1.getPosition().x, this.ground2.getPosition().x, this.ground3.getPosition().x);
     }
 }

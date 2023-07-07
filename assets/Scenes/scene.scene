@@ -376,7 +376,7 @@
     "_priority": 1073741824,
     "_fov": 45,
     "_fovAxis": 0,
-    "_orthoHeight": 480,
+    "_orthoHeight": 479.99999999999994,
     "_near": 1,
     "_far": 2000,
     "_color": {
@@ -755,7 +755,7 @@
     "_group": 1,
     "_type": 2,
     "_allowSleep": true,
-    "_gravityScale": 2.4,
+    "_gravityScale": 3,
     "_linearDamping": 2,
     "_angularDamping": 0,
     "_linearVelocity": {
@@ -1904,12 +1904,12 @@
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": -445.8
+      "y": 532.6
     },
     "_size": {
       "__type__": "cc.Size",
       "width": 100,
-      "height": 100
+      "height": 98.7
     },
     "_id": "4eyr2gl1RKm4E9NgXu7UGx"
   },
@@ -2029,12 +2029,12 @@
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 533
+      "y": 532.6
     },
     "_size": {
       "__type__": "cc.Size",
       "width": 100,
-      "height": 100
+      "height": 100.9
     },
     "_id": "60toAxeKJGpLqRmCRVIqsd"
   },
